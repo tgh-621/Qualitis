@@ -27,20 +27,10 @@ public class AddClusterInfoRequest {
     private String clusterName;
     @JsonProperty("cluster_type")
     private String clusterType;
-    @JsonProperty("meta_store_address")
-    private String metaStoreAddress;
-    @JsonProperty("hive_server2_address")
-    private String hiveServer2Address;
     @JsonProperty("linkis_address")
     private String linkisAddress;
     @JsonProperty("linkis_token")
     private String linkisToken;
-    @JsonProperty("hive_database_address")
-    private String hiveDatabaseAddress;
-    @JsonProperty("hive_database_username")
-    private String hiveDatabaseUsername;
-    @JsonProperty("hive_database_password")
-    private String hiveDatabasePassword;
     public AddClusterInfoRequest() {
         // Default Constructor
     }
@@ -61,22 +51,6 @@ public class AddClusterInfoRequest {
         this.clusterType = clusterType;
     }
 
-    public String getMetaStoreAddress() {
-        return metaStoreAddress;
-    }
-
-    public void setMetaStoreAddress(String metaStoreAddress) {
-        this.metaStoreAddress = metaStoreAddress;
-    }
-
-    public String getHiveServer2Address() {
-        return hiveServer2Address;
-    }
-
-    public void setHiveServer2Address(String hiveServer2Address) {
-        this.hiveServer2Address = hiveServer2Address;
-    }
-
     public String getLinkisAddress() {
         return linkisAddress;
     }
@@ -93,37 +67,11 @@ public class AddClusterInfoRequest {
         this.linkisToken = linkisToken;
     }
 
-    public String getHiveDatabaseAddress() {
-        return hiveDatabaseAddress;
-    }
-
-    public void setHiveDatabaseAddress(String hiveDatabaseAddress) {
-        this.hiveDatabaseAddress = hiveDatabaseAddress;
-    }
-
-    public String getHiveDatabaseUsername() {
-        return hiveDatabaseUsername;
-    }
-
-    public void setHiveDatabaseUsername(String hiveDatabaseUsername) {
-        this.hiveDatabaseUsername = hiveDatabaseUsername;
-    }
-
-    public String getHiveDatabasePassword() {
-        return hiveDatabasePassword;
-    }
-
-    public void setHiveDatabasePassword(String hiveDatabasePassword) {
-        this.hiveDatabasePassword = hiveDatabasePassword;
-    }
-
     @Override
     public String toString() {
         return "AddClusterInfoRequest{" +
                 "clusterName='" + clusterName + '\'' +
                 ", clusterType='" + clusterType + '\'' +
-                ", metaStoreAddress='" + metaStoreAddress + '\'' +
-                ", hiveServer2Address='" + hiveServer2Address + '\'' +
                 ", linkisAddress='" + linkisAddress + '\'' +
                 ", linkisToken='" + linkisToken + '\'' +
                 '}';

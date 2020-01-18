@@ -17,7 +17,6 @@
 package com.webank.wedatasphere.qualitis.service.impl;
 
 import com.webank.wedatasphere.qualitis.dao.ClusterInfoDao;
-import com.webank.wedatasphere.qualitis.hive.client.HiveJdbcConnectionFactory;
 import com.webank.wedatasphere.qualitis.request.DeleteClusterInfoRequest;
 import com.webank.wedatasphere.qualitis.request.ModifyClusterInfoRequest;
 import com.webank.wedatasphere.qualitis.entity.ClusterInfo;
@@ -27,12 +26,6 @@ import com.webank.wedatasphere.qualitis.request.PageRequest;
 import com.webank.wedatasphere.qualitis.response.GeneralResponse;
 import com.webank.wedatasphere.qualitis.response.GetAllResponse;
 import com.webank.wedatasphere.qualitis.service.ClusterInfoService;
-import com.webank.wedatasphere.qualitis.service.RefreshMetaDataService;
-import com.webank.wedatasphere.qualitis.request.AddClusterInfoRequest;
-import com.webank.wedatasphere.qualitis.request.DeleteClusterInfoRequest;
-import com.webank.wedatasphere.qualitis.request.ModifyClusterInfoRequest;
-import com.webank.wedatasphere.qualitis.request.AddClusterInfoRequest;
-import com.webank.wedatasphere.qualitis.request.ModifyClusterInfoRequest;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -52,12 +45,6 @@ public class ClusterInfoServiceImpl implements ClusterInfoService {
     @Autowired
     private ClusterInfoDao clusterInfoDao;
 
-    @Autowired
-    private HiveJdbcConnectionFactory hiveJdbcConnectionFactory;
-
-    @Autowired
-    private RefreshMetaDataService refreshMetaDataService;
-
     private static final Logger LOGGER = LoggerFactory.getLogger(ClusterInfoServiceImpl.class);
 
     @Override
@@ -69,13 +56,8 @@ public class ClusterInfoServiceImpl implements ClusterInfoService {
         // 查看clusterName是否已存在
         String clusterName = request.getClusterName();
         String clusterType = request.getClusterType();
-        String metaStoreAddress = request.getMetaStoreAddress();
-        String hiveServer2Address = request.getHiveServer2Address();
         String linkisAddress = request.getLinkisAddress();
         String linkisToken = request.getLinkisToken();
-        String hiveDatabaseAddress = request.getHiveDatabaseAddress();
-        String hiveDatabaseUsername = request.getHiveDatabaseUsername();
-        String hiveDatabasePassword = request.getHiveDatabasePassword();
         ClusterInfo clusterInfoInDb = clusterInfoDao.findByClusterName(clusterName);
         if (clusterInfoInDb != null) {
             throw new UnExpectedRequestException("cluster name {&ALREADY_EXIST}");
@@ -85,16 +67,9 @@ public class ClusterInfoServiceImpl implements ClusterInfoService {
         ClusterInfo newClusterInfo = new ClusterInfo();
         newClusterInfo.setClusterName(clusterName);
         newClusterInfo.setClusterType(clusterType);
-        newClusterInfo.setMetaStoreAddress(metaStoreAddress);
-        newClusterInfo.setHiveServer2Address(hiveServer2Address);
         newClusterInfo.setLinkisAddress(linkisAddress);
         newClusterInfo.setLinkisToken(linkisToken);
-        newClusterInfo.setHiveDatabaseAddress(hiveDatabaseAddress);
-        newClusterInfo.setHiveDatabaseUsername(hiveDatabaseUsername);
-        newClusterInfo.setHiveDatabasePassword(hiveDatabasePassword);
         ClusterInfo savedClusterInfo = clusterInfoDao.saveClusterInfo(newClusterInfo);
-        hiveJdbcConnectionFactory.refreshDataSource(savedClusterInfo);
-        refreshMetaDataService.refreshCluster();
 
         LOGGER.info("Succeed to add cluster_info, response: {}", savedClusterInfo);
         return new GeneralResponse<>("200", "{&ADD_CLUSTER_INFO_SUCCESSFULLY}", savedClusterInfo);
@@ -115,7 +90,6 @@ public class ClusterInfoServiceImpl implements ClusterInfoService {
 
         // 删除clusterInfo
         clusterInfoDao.deleteClusterInfo(clusterInfoInDb);
-        refreshMetaDataService.refreshCluster();
         LOGGER.info("Succeed to delete cluster_info. id: {}", request.getClusterInfoId());
         return new GeneralResponse<>("200", "{&DELETE_CLUSTER_INFO_SUCCESSFULLY}", null);
     }
@@ -141,15 +115,9 @@ public class ClusterInfoServiceImpl implements ClusterInfoService {
         clusterInfoInDb.setClusterType(clusterType);
         clusterInfoInDb.setLinkisAddress(request.getLinkisAddress());
         clusterInfoInDb.setLinkisToken(request.getLinkisToken());
-        clusterInfoInDb.setHiveServer2Address(request.getHiveServer2Address());
-        clusterInfoInDb.setMetaStoreAddress(request.getMetaStoreAddress());
-        clusterInfoInDb.setHiveDatabaseAddress(request.getHiveDatabaseAddress());
-        clusterInfoInDb.setHiveDatabaseUsername(request.getHiveDatabaseUsername());
-        clusterInfoInDb.setHiveDatabasePassword(request.getHiveDatabasePassword());
 
         // 保存clusterInfo
         ClusterInfo savedClusterInfo = clusterInfoDao.saveClusterInfo(clusterInfoInDb);
-        hiveJdbcConnectionFactory.refreshDataSource(savedClusterInfo);
 
         LOGGER.info("Succeed to modify cluster_info. cluster_info: {}", savedClusterInfo);
         return new GeneralResponse<>("200", "{&MODIFY_CLUSTER_INFO_SUCCESSFULLY}", null);
@@ -181,13 +149,8 @@ public class ClusterInfoServiceImpl implements ClusterInfoService {
         checkId(request.getClusterInfoId());
         checkString(request.getClusterName(), "cluster name");
         checkString(request.getClusterType(), "cluster type");
-        checkString(request.getMetaStoreAddress(), "Meta_store_address");
-        checkString(request.getHiveServer2Address(), "Hive_server2_address");
         checkString(request.getLinkisAddress(), "Ujes_address");
         checkString(request.getLinkisToken(), "Ujes_token");
-        checkString(request.getHiveDatabaseAddress(), "Hive database address");
-        checkString(request.getHiveDatabaseUsername(), "Hive database username");
-        checkString(request.getHiveDatabasePassword(), "Hive database password");
     }
 
     private void checkRequest(DeleteClusterInfoRequest request) throws UnExpectedRequestException {
@@ -203,13 +166,8 @@ public class ClusterInfoServiceImpl implements ClusterInfoService {
         }
         checkString(request.getClusterName(), "cluster name");
         checkString(request.getClusterType(), "cluster type");
-        checkString(request.getMetaStoreAddress(), "Meta_store_address");
-        checkString(request.getHiveServer2Address(), "Hive_server2_address");
         checkString(request.getLinkisAddress(), "Ujes_address");
         checkString(request.getLinkisToken(), "Ujes_token");
-        checkString(request.getHiveDatabaseAddress(), "Hive database address");
-        checkString(request.getHiveDatabaseUsername(), "Hive database username");
-        checkString(request.getHiveDatabasePassword(), "Hive database password");
     }
 
     private void checkString(String str, String strName) throws UnExpectedRequestException {

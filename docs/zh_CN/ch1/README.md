@@ -3,7 +3,7 @@
 [English](../../../) | 中文  
 
 ## 引言
-Qualitis是一个支持多种异构数据源的质量校验、通知、管理服务的一站式数据质量管理平台，用于解决业务系统运行、数据中心建设及数据治理过程中的各种数据质量问题。
+Qualitis是一个支持多种异构数据源的质量校验、通知、管理服务的数据质量管理平台，用于解决业务系统运行、数据中心建设及数据治理过程中的各种数据质量问题。
 
 Qualitis基于Spring Boot，依赖于Linkis进行数据计算，提供数据质量模型构建，数据质量模型执行，数据质量任务管理，异常数据发现保存以及数据质量报表生成等功能。并提供了金融级数据质量模型资源隔离，资源管控，权限隔离等企业特性，具备高并发，高性能，高可用的大数据质量管理能力。
 
@@ -42,7 +42,6 @@ Qualitis基于Spring Boot，依赖于Linkis进行数据计算，提供数据质�
 [用户手册](用户手册.md)  
 [架构设计文档](架构设计文档.md)  
 <br/>
-**更多文档，请[点我访问](https://github.com/WeBankFinTech/Qualitis/wiki)**
 
 ## Architecture
 ![](../../../images/zh_CN/ch1/总体架构设计.png)
@@ -75,3 +74,8 @@ Qualitis基于Spring Boot，依赖于Linkis进行数据计算，提供数据质�
 
 ## License
 **Linkis is under the Apache 2.0 license. See the [LICENSE](/LICENSE) file for details.**
+
+## Tips
+由于Qualitis的前端代码是采用WeBank自研的前端框架FES，但是FES框架目前没有开源，所以Qualitis的前端代码暂不开源。我们会尽快推进Qualitis的前端开源。对此我们感到非常抱歉。
+
+你可以通过源码下载，并解压web/app/src/main/resources/static/static.zip来获取编译后的前端代码，或者通过下载release直接使用。

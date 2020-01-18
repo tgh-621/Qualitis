@@ -3,7 +3,7 @@
 English | [中文](docs/zh_CN/ch1)  
 
 ## Overview
-Qualitis is a one-stop data quality management platform that supports quality verification, notification, and management for various datasource. It is used to solve various data quality problems caused by data processing.
+Qualitis is a data quality management platform that supports quality verification, notification, and management for various datasource. It is used to solve various data quality problems caused by data processing.
 
 Based on Spring Boot, Qualitis submits quality model task to [Linkis](https://github.com/WeBankFinTech/Linkis) platform. It provides functions such as data quality model construction, data quality model execution, data quality verification, reports of data quality generation and so on.
 
@@ -73,3 +73,8 @@ If you desire immediate response, please kindly raise issues to us or scan the b
 
 ## License
 **Linkis is under the Apache 2.0 license. See the [LICENSE](/LICENSE) file for details.**
+
+## Tips
+Because the front-end code of Qualitis is FES, a front-end framework developed by WeBank, but the FES framework is not currently open source, so the front-end code of Qualitis is not open source for the time being. We will promote Qualitis's front-end open source as soon as possible. We are very sorry about this.
+
+You can download the source code and unzip web/app/src/main/resources/static/static.zip to get the compiled front-end code, or use it directly by downloading the release.

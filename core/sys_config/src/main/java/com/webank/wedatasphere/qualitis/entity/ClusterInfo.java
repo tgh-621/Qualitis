@@ -24,7 +24,7 @@ import javax.persistence.*;
  * @author howeye
  */
 @Entity
-@Table(name = "config_cluster_info")
+@Table(name = "qualitis_config_cluster_info")
 public class ClusterInfo {
 
     @Id
@@ -38,31 +38,12 @@ public class ClusterInfo {
     @Column(name = "cluster_type", length = 100)
     @JsonProperty("cluster_type")
     private String clusterType;
-    @Column(length = 100, name = "meta_store_address")
-    @JsonProperty("meta_store_address")
-    private String metaStoreAddress;
-    @Column(length = 100, name = "hive_server2_address")
-    @JsonProperty("hive_server2_address")
-    private String hiveServer2Address;
     @Column(length = 100, name = "linkis_address")
     @JsonProperty("linkis_address")
     private String linkisAddress;
     @Column(name = "linkis_token", length = 500)
     @JsonProperty("linkis_token")
     private String linkisToken;
-
-    @Column(name = "hive_database_address")
-    @JsonProperty("hive_database_address")
-    private String hiveDatabaseAddress;
-    @Column(name = "hive_database_username")
-    @JsonProperty("hive_database_username")
-    private String hiveDatabaseUsername;
-    @Column(name = "hive_database_password")
-    @JsonProperty("hive_database_password")
-    private String hiveDatabasePassword;
-    @Column(name = "cluster_env")
-    @JsonProperty("cluster_env")
-    private String clusterEnv;
 
     public ClusterInfo() {
         // Default Constructor
@@ -92,22 +73,6 @@ public class ClusterInfo {
         this.clusterType = clusterType;
     }
 
-    public String getMetaStoreAddress() {
-        return metaStoreAddress;
-    }
-
-    public void setMetaStoreAddress(String metaStoreAddress) {
-        this.metaStoreAddress = metaStoreAddress;
-    }
-
-    public String getHiveServer2Address() {
-        return hiveServer2Address;
-    }
-
-    public void setHiveServer2Address(String hiveServer2Address) {
-        this.hiveServer2Address = hiveServer2Address;
-    }
-
     public String getLinkisAddress() {
         return linkisAddress;
     }
@@ -122,37 +87,5 @@ public class ClusterInfo {
 
     public void setLinkisToken(String linkisToken) {
         this.linkisToken = linkisToken;
-    }
-
-    public String getHiveDatabaseAddress() {
-        return hiveDatabaseAddress;
-    }
-
-    public void setHiveDatabaseAddress(String hiveDatabaseAddress) {
-        this.hiveDatabaseAddress = hiveDatabaseAddress;
-    }
-
-    public String getHiveDatabaseUsername() {
-        return hiveDatabaseUsername;
-    }
-
-    public void setHiveDatabaseUsername(String hiveDatabaseUsername) {
-        this.hiveDatabaseUsername = hiveDatabaseUsername;
-    }
-
-    public String getHiveDatabasePassword() {
-        return hiveDatabasePassword;
-    }
-
-    public void setHiveDatabasePassword(String hiveDatabasePassword) {
-        this.hiveDatabasePassword = hiveDatabasePassword;
-    }
-
-    public String getClusterEnv() {
-        return clusterEnv;
-    }
-
-    public void setClusterEnv(String clusterEnv) {
-        this.clusterEnv = clusterEnv;
     }
 }
